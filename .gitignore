@@ -1,4 +1,12 @@
-*
+db
+db_import
+db_test
+db_tools
+export
+export_crossref
+lib
+venv
+webapp
 
 !Makefile
 !.gitignore
