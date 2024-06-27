@@ -108,14 +108,14 @@ bibstr += Path('../db/crypto_db.bib').read_text(encoding='UTF-8')
 db = bibtexparser.parse_string(bibstr, parse_stack = parse_stack)
 expand_crossref(db)
 fix_strings(db)
-missing = {}
+missing = []
 for entry in db.entries:
     fields = entry.fields_dict
     entry_type = entry.entry_type.lower()
-    if 'doi' not in fields and entry_type == 'inproceedings' or entry_type == 'article':
+    if 'doi' not in fields and (entry_type == 'inproceedings' or entry_type == 'article'):
         values = {key: value.value for key,value in fields.items()}
         values['bibkey'] = entry.key
         values['entry_type'] = entry.entry_type
-        missing[entry.key] = values
+        missing.append(values)
 print(json.dumps(missing, indent=2))
     
